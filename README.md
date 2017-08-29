@@ -70,23 +70,14 @@ This will generate a *Cloudflare-trusted* certificate for `example.com,hi.exampl
 
 ## Hacking Trellis' Playbook
 
-Add this role to `roles/wordpress-setup/tasks/main.yml` **between** `nginx-includes.yml` and `nginx.yml`:
+Add this role to `server.yml` **immediately** above `role: wordpress-setup`:
 
 ```yaml
-# Some more lines above...
-- include: nginx-includes.yml
-  tags: [nginx-includes, wordpress-setup-nginx]
-
-# Start of Hacking
-- include_role:
-    name: typisttech.trellis-cloudflare-origin-ca # Indentation!
-  when: '"cloudflare-origin-ca" in wordpress_sites|json_query("*.ssl.provider")'
-  tags: wordpress-setup-cloudflare-origin-ca
-# End of Hacking
-
-- include: nginx.yml
-  tags: wordpress-setup-nginx
-# Some more lines below...
+roles:
+    # Some other Trellis roles ...
+    - { role: TypistTech.trellis-cloudflare-origin-ca, tags: [cloudflare-origin-ca] } # Case-sensitive!
+    - { role: wordpress-setup, tags: [wordpress, wordpress-setup] }
+    # Some other Trellis roles ...
 ```
 
 ## Support!

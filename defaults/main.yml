@@ -1,0 +1,1 @@
+sites_using_cloudflare_origin_ca: "[{% for name, site in wordpress_sites.iteritems() if site.ssl.enabled and site.ssl.provider | default('manual') == 'cloudflare-origin-ca' %}'{{ name }}',{% endfor %}]"
