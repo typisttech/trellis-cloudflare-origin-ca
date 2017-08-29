@@ -1,0 +1,12 @@
+{% extends 'roles/wordpress-setup/templates/wordpress-site.conf.j2' %}
+
+{% block https -%}
+  {{ super() -}}
+  {% if ssl_enabled -%}
+  {% if item.value.ssl.provider | default('manual') == 'cloudflare-origin-ca' -%}
+  ssl_certificate         {{ nginx_path }}/ssl/cloudflare-origin-ca/{{ item.key }}.pem;
+  ssl_certificate_key     {{ nginx_path }}/ssl/cloudflare-origin-ca/{{ item.key }}.key;
+
+  {% endif -%}
+  {% endif -%}
+{%- endblock %}
