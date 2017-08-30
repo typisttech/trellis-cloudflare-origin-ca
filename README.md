@@ -15,7 +15,6 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
 * Ubuntu 16.04 (Xenial)
 * Read about [CloudFlare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#iiobtainyourcertificateapitoken)
 * Read about [Trellis SSL](https://roots.io/trellis/docs/ssl/)
-* Read about [Trellis Nginx Includes](https://roots.io/trellis/docs/nginx-includes/)
 * Read about [Ansible Vault](https://roots.io/trellis/docs/vault/)
 
 ## Installation
@@ -24,7 +23,7 @@ Add this role to `requirements.yml`:
 
 ```yaml
 - src: TypistTech.trellis-cloudflare-origin-ca # Case-sensitive!
-  version: 0.2.0
+  version: 0.3.0
 ```
 
 Run `ansible-galaxy install -r requirements.yml` to install this new role.
@@ -42,14 +41,6 @@ vault_cloudflare_origin_ca_key: v1.0-xxxxxxxxxxx
 Note:
 * `Origin CA Key` and `Global API Key` are different.
 * [How to obtain your Cloudflare `Origin CA Key`?](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#iiobtainyourcertificateapitoken)
-
-### `nginx_wordpress_site_conf`
-
-Define `nginx_wordpress_site_conf` in your `group_vars/all/main.yml` to use this role's nginx site template::
-
-```yaml
-nginx_wordpress_site_conf: vendor/roles/TypistTech.trellis-cloudflare-origin-ca/templates/wordpress-site.conf.child
-```
 
 ### `provider: cloudflare-origin-ca`
 Set `provider: cloudflare-origin-ca` in `group_vars/<environment>/wordpress_sites.yml`:
@@ -71,15 +62,22 @@ This will generate a *Cloudflare-trusted* certificate for `example.com,hi.exampl
 
 ## Hacking Trellis' Playbook
 
-Add this role to `server.yml` **immediately** above `role: wordpress-setup`:
+Add this role to `server.yml` **immediately after** `role: wordpress-setup`:
 
 ```yaml
 roles:
     # Some other Trellis roles ...
-    - { role: TypistTech.trellis-cloudflare-origin-ca, tags: [cloudflare-origin-ca] } # Case-sensitive!
     - { role: wordpress-setup, tags: [wordpress, wordpress-setup] }
+    - { role: TypistTech.trellis-cloudflare-origin-ca, tags: [cloudflare-origin-ca, wordpress-setup] } # Case-sensitive!
     # Some other Trellis roles ...
 ```
+
+## Caveats
+
+* Your Nginx site conf must contain this line:
+    ```
+      # SSL configuration
+    ```
 
 ## Support!
 

@@ -1,0 +1,21 @@
+---
+- name: Remove old SSL certificate directives from Nginx site confs
+  replace:
+    path: "{{ nginx_path }}/sites-available/{{ item.key }}.conf"
+    regexp: '^(\s+)(ssl_(trusted_)?(certificate(_key)?))(.+)?$'
+  with_dict: "{{ wordpress_sites }}"
+  when: item.key in sites_using_cloudflare_origin_ca
+  notify: reload nginx
+
+- name: Add Cloudflare Origin CA directives to Nginx site confs
+  replace:
+    path: "{{ nginx_path }}/sites-available/{{ item.key }}.conf"
+    regexp: '^(\s+)(# SSL configuration)(.+)?$'
+    replace: >
+      \1\2
+      \1ssl_certificate         {{ nginx_path }}/ssl/cloudflare-origin-ca/{{ item.key }}.pem;
+      \1ssl_trusted_certificate {{ nginx_path }}/ssl/cloudflare-origin-ca/{{ item.key }}.pem;
+      \1ssl_certificate_key     {{ nginx_path }}/ssl/cloudflare-origin-ca/{{ item.key }}.key;
+  with_dict: "{{ wordpress_sites }}"
+  when: item.key in sites_using_cloudflare_origin_ca
+  notify: reload nginx
