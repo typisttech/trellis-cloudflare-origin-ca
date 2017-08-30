@@ -3,5 +3,22 @@
     msg: vault_cloudflare_origin_ca_key is not defined
   when: vault_cloudflare_origin_ca_key is not defined
 
+- fail:
+    msg: No site is using Cloudflare Origin CA
+  when: ( sites_using_cloudflare_origin_ca | count ) < 1
+
+- name: Read Nginx site confs
+  command: "cat {{ nginx_path }}/sites-available/{{ item.key }}.conf"
+  register: cat_site_confs_raw
+  with_dict: "{{ wordpress_sites }}"
+  when: ( item.key in sites_using_cloudflare_origin_ca ) # and
+
+- fail:
+    msg: "{{ item.cmd[1] }} does not contains '# SSL configuration'"
+  with_items:
+    - "{{ cat_site_confs_raw.results }}"
+  when: not ( item.stdout | search('# SSL configuration') )
+
 - include: setup.yml
 - include: certificates.yml
+- include: nginx.yml

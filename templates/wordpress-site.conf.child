@@ -1,6 +1,0 @@
-{% extends 'roles/wordpress-setup/templates/wordpress-site.conf.j2' %}
-
-{% block https -%}
-  {{ super() -}}
-  {% include './cloudflare-origin-ca.conf.j2' %}
-{%- endblock %}
