@@ -127,6 +127,8 @@ If you already using a [child template](https://roots.io/trellis/docs/nginx-incl
 
 ## See Also
 
+* [Sunny](https://wordpress.org/plugins/sunny/) - Automatically purge CloudFlare cache, including cache everything rules
+* [WP Cloudflare Guard](https://wordpress.org/plugins/wp-cloudflare-guard/) - Connecting WordPress with Cloudflare firewall, protect your WordPress site at DNS level. Automatically create firewall rules to block dangerous IPs
 * The [Root](https://github.com/roots/trellis/issues/868) of Trellis Cloudflare Origin CA
 * The [Origin](https://github.com/roots/trellis/pull/870) of Trellis Cloudflare Origin CA
 * [CloudFlare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/)
