@@ -76,8 +76,10 @@ wordpress_sites:
           - hi.example.com
           - hello.another-example.com
     ssl:
-      # Must be enabled
+      # SSL must be enabled
       enabled: true
+      # Stapling must be disabled
+      stapling_enabled: false
       # Use this role to generate Cloudflare Origin CA certificate
       provider: cloudflare-origin-ca
 ```
@@ -122,8 +124,6 @@ If you already using a [child template](https://roots.io/trellis/docs/nginx-incl
 
 > ... you're trying to staple OCSP responses with Origin CA. Right now OCSP is not supported with Origin CA, so you should remove the ssl_staping directive for the host that you're using the Origin CA cert on...
 > --- Cloudflare Support
-
-Wait for [roots/trellis#874](https://github.com/roots/trellis/pull/874).
 
 ## See Also
 
