@@ -1,7 +1,18 @@
 ---
 - fail:
+    msg: No site is using Cloudflare Origin CA
+  when: sites_using_cloudflare_origin_ca | count < 1
+
+- fail:
     msg: vault_cloudflare_origin_ca_key is not defined
   when: vault_cloudflare_origin_ca_key is not defined
 
+- fail:
+    msg: "{{ item.key }} is using Cloudflare Origin CA but OCSP stapling is enabled"
+  with_dict: "{{ wordpress_sites }}"
+  when: item.key in sites_using_cloudflare_origin_ca and ssl_stapling_enabled
+
 - include: setup.yml
 - include: certificates.yml
+- include: nginx.yml
+  tags: [nginx-includes, wordpress-setup-nginx]

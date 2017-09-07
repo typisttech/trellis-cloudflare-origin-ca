@@ -1,6 +1,6 @@
-{% if ssl_enabled -%}
-{% if item.value.ssl.provider | default('manual') == 'cloudflare-origin-ca' -%}
-ssl_certificate         {{ nginx_path }}/ssl/cloudflare-origin-ca/{{ item.key }}.pem;
-ssl_certificate_key     {{ nginx_path }}/ssl/cloudflare-origin-ca/{{ item.key }}.key;
-{% endif -%}
-{% endif -%}
+# {{ ansible_managed }}
+
+# Cloudflare Origin CA
+
+ssl_certificate {{ nginx_path }}/ssl/cloudflare-origin-ca/{{ item.key }}.pem;
+ssl_certificate_key {{ nginx_path }}/ssl/cloudflare-origin-ca/{{ item.key }}.key;

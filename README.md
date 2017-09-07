@@ -17,10 +17,11 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
 - [Role Variables](#role-variables)
 - [Hacking Trellis' Playbook](#hacking-trellis-playbook)
 - [Nginx Includes](#nginx-includes)
-  - [Optiona A: `nginx_wordpress_site_conf`](#optiona-a-nginx_wordpress_site_conf)
-  - [Optiona B: `include cloudflare-origin-ca.conf.j2`](#optiona-b-include-cloudflare-origin-caconfj2)
-- [Caveats](#caveats)
-  - [OCSP stapling should be disabled](#ocsp-stapling-should-be-disabled)
+- [Common Errors](#common-errors)
+  - [No site is using Cloudflare Origin CA](#no-site-is-using-cloudflare-origin-ca)
+  - [`vault_cloudflare_origin_ca_key` is not defined](#vault_cloudflare_origin_ca_key-is-not-defined)
+  - [`example.com` is using Cloudflare Origin CA but OCSP stapling is enabled](#examplecom-is-using-cloudflare-origin-ca-but-ocsp-stapling-is-enabled)
+  - [Nginx directories not included](#nginx-directories-not-included)
 - [See Also](#see-also)
 - [Support!](#support)
   - [Donate via PayPal *](#donate-via-paypal-)
@@ -46,7 +47,7 @@ Add this role to `requirements.yml`:
 
 ```yaml
 - src: TypistTech.trellis-cloudflare-origin-ca # Case-sensitive!
-  version: 0.2.0 # Check for latest version!
+  version: 0.3.0 # Check for latest version!
 ```
 
 Run `$ ansible-galaxy install -r requirements.yml` to install this new role.
@@ -78,7 +79,7 @@ wordpress_sites:
     ssl:
       # SSL must be enabled
       enabled: true
-      # Stapling must be disabled
+      # OCSP stapling must be disabled
       stapling_enabled: false
       # Use this role to generate Cloudflare Origin CA certificate
       provider: cloudflare-origin-ca
@@ -88,13 +89,13 @@ This will generate a *Cloudflare-trusted* certificate for `example.com,hi.exampl
 
 ## Hacking Trellis' Playbook
 
-Add this role to `server.yml` **immediately** above `role: wordpress-setup`:
+Add this role to `server.yml` **immediately after** `role: wordpress-setup`:
 
 ```yaml
 roles:
     # Some other Trellis roles ...
-    - { role: TypistTech.trellis-cloudflare-origin-ca, tags: [cloudflare-origin-ca], when: sites_using_cloudflare_origin_ca | count }
     - { role: wordpress-setup, tags: [wordpress, wordpress-setup, letsencrypt, cloudflare-origin-ca] }
+    - { role: TypistTech.trellis-cloudflare-origin-ca, tags: [cloudflare-origin-ca, wordpress-setup], when: sites_using_cloudflare_origin_ca | count }
     # Some other Trellis roles ...
 ```
 
@@ -102,28 +103,34 @@ Note: `role: wordpress-setup` is tagged with `cloudflare-origin-ca`.
 
 ## Nginx Includes
 
-### Optiona A: `nginx_wordpress_site_conf`
+This role templates Nginx SSL directives out to `{{ nginx_path }}/includes.d/{{ item.key }}/cloudflare-origin-ca.conf`. Trellis includes this file [here](https://github.com/roots/trellis/blob/4cd1be12a8cfacf78af3a9a1302bea153f80e459/roles/wordpress-setup/templates/wordpress-site.conf.j2#L106) and [here](https://github.com/roots/trellis/pull/879/files) by default, no action needed.
 
-Define `nginx_wordpress_site_conf` in your `group_vars/all/main.yml` to use this role's Nginx site template:
-
-```yaml
-nginx_wordpress_site_conf: vendor/roles/TypistTech.trellis-cloudflare-origin-ca/templates/wordpress-site.conf.child
+If you using [Nginx child templates](https://roots.io/trellis/docs/nginx-includes/#child-templates), add this line into your server blocks:
+```
+include includes.d/{{ item.key }}/cloudflare-origin-ca.conf;
 ```
 
-### Optiona B: `include cloudflare-origin-ca.conf.j2`
+## Common Errors
 
-If you already using a [child template](https://roots.io/trellis/docs/nginx-includes/), add this line to every server block that use Cloudflare Origin CA:
+### No site is using Cloudflare Origin CA
 
-```
-{% include 'vendor/roles/TypistTech.trellis-cloudflare-origin-ca/templates/cloudflare-origin-ca.conf.j2' %}
-```
+Obviously, you should not run this role when you don't use Cloudflare Origin CA.
 
-## Caveats
+### `vault_cloudflare_origin_ca_key` is not defined
 
-### OCSP stapling should be disabled
+Encrypt your Cloudflare Origin CA Key in `group_vars/<environment>/vault.yml`. See [role variables](#role-variables).
+
+### `example.com` is using Cloudflare Origin CA but OCSP stapling is enabled
 
 > ... you're trying to staple OCSP responses with Origin CA. Right now OCSP is not supported with Origin CA, so you should remove the ssl_staping directive for the host that you're using the Origin CA cert on...
+>
 > --- Cloudflare Support
+
+Cloudflare Origin CA doesn't support OCSP stapling. Disable OCSP stapling for all sites using Cloudflare Origin CA. See [role variables](#role-variables).
+
+### Nginx directories not included
+
+Make sure you have [roots/trellis@f2b8107](https://github.com/roots/trellis/commit/f2b81074c83475837e544a8aa5c3e909e760aa8a) or later.
 
 ## See Also
 
