@@ -9,6 +9,7 @@
 
 **Merged pull requests:**
 
+- Add changelog [\#17](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/17) ([TangRufus](https://github.com/TangRufus))
 - Refactor: tasks/certificates.yml [\#16](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/16) ([TangRufus](https://github.com/TangRufus))
 - Allow override package state and defaults to latest [\#15](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/15) ([TangRufus](https://github.com/TangRufus))
 

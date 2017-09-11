@@ -54,7 +54,7 @@ Add this role to `requirements.yml`:
 
 ```yaml
 - src: TypistTech.trellis-cloudflare-origin-ca # Case-sensitive!
-  version: 0.4.0 # Check for latest version!
+  version: 0.5.0 # Check for latest version!
 ```
 
 Run `$ ansible-galaxy install -r requirements.yml` to install this new role.
