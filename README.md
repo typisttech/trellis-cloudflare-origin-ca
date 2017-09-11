@@ -84,9 +84,25 @@ wordpress_sites:
       stapling_enabled: false
       # Use this role to generate Cloudflare Origin CA certificate
       provider: cloudflare-origin-ca
+    # The followings are optional
+    cloudflare_origin_ca:
+      # Number of days for which the issued cert will be valid. Acceptable options are: 7, 30, 90, 365 (1y), 730 (2y), 1095 (3y), 5475 (15y).
+      # Default: 5475
+      days: 7
+      # List of fully-qualified domain names to include on the certificate as Subject Alternative Names.
+      # Default: All canonical and redirect domains
+      # In the above example: example.com, hi.example.com, hello.another-example.com
+      hostnames:
+        - example.com
+        - '*.example.com'
+        - '*.another-example.com'
+      # Key size in bits to use for the generated key pair (Acceptable sizes: rsa: 2048|3072|4096, ecdsa: 256|384|521)
+      # Default: 256
+      key_size: 3072
+      # Type of key pair to generate, either RSA or ECDSA. (rsa|ecdsa)
+      # Default: ecdsa
+      key_type: rsa
 ```
-
-This will generate a *Cloudflare-trusted* certificate for `example.com,hi.example.com,hello.another-example.com`.
 
 ## Hacking Trellis' Playbook
 
@@ -132,6 +148,36 @@ Cloudflare Origin CA doesn't support OCSP stapling. Disable OCSP stapling for al
 ### Nginx directories not included
 
 Make sure you have [roots/trellis@f2b8107](https://github.com/roots/trellis/commit/f2b81074c83475837e544a8aa5c3e909e760aa8a) or later.
+
+## FAQ
+
+### Why use Cloudflare Origin CA?
+
+Short answer: To keep connection between Cloudflare and your severs private and secure from tampering.
+
+Long answer:
+> CloudFlare’s Flexible SSL mode is the default for CloudFlare sites on the Free plan. Flexible SSL mode means that traffic from browsers to CloudFlare will be encrypted, but traffic from CloudFlare to a site's origin server will not be. To take advantage of our [Full and Strict SSL](https://www.cloudflare.com/ssl) mode—which encrypts the connection between CloudFlare and the origin server—it’s necessary to install a certificate on the origin server.
+>
+> Cloudflare Blog - [Origin Server Connection Security with Universal SS ](https://blog.cloudflare.com/origin-server-connection-security-with-universal-ssl/)
+
+### What are the benefits of Cloudflare Origin CA over Let's Encrypt?
+
+To get certificates from [Let's Encrypt](https://letsencrypt.org/), you have to first disable Cloudflare because Cloudflare hides actual server IPs and make Let's Encrypt challenges fail. Using Cloudflare Origin CA simplify the troubles.
+
+### What are the benefits of Cloudflare Origin CA over other public certificates?
+
+See [Introducing CloudFlare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates) on Cloudflare blog.
+
+### Why use 256-bit ECDSA key as default?
+
+>I assume you would like to setup [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617-Authenticated-Origin-Pulls) with Cloudflare. I would recommend ECDSA, as elliptic curves provide the same security with less computational overhead.
+>
+>Find out more about [ECDSA: The digital signature algorithm of a better internet](https://blog.cloudflare.com/ecdsa-the-digital-signature-algorithm-of-a-better-internet/)
+>The above article also mentioned that: According to the [ECRYPT II recommendations](http://www.keylength.com/en/3/) on key length, a 256-bit elliptic curve key provides as much protection as a 3,248-bit asymmetric key.Typical RSA keys in website certificates are 2048-bits. So, I think going with 256-bits ECDSA will be a good choice.
+>
+> --- Cloudflare Support
+
+If you insist to use RSA keys, make sure you set `key_size` to at least `2048`.
 
 ## See Also
 
