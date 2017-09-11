@@ -70,6 +70,15 @@ Run `$ ansible-galaxy install -r requirements.yml` to install this new role.
 ## See: https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#iiobtainyourcertificateapitoken
 vault_cloudflare_origin_ca_key: v1.0-xxxxxxxxxxx
 
+# group_vars/<environment>/main.yml
+###################################
+
+# Indicates the desired package state.
+# `latest` ensures that the latest version is installed.
+# `present` does not update if already installed.
+# Choices: present|latest
+# Default: latest
+cfca_package_state: present
 
 # group_vars/<environment>/wordpress_sites.yml
 ##############################################
