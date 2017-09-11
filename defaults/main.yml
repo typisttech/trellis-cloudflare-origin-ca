@@ -6,3 +6,5 @@ site_cfca_days: "{{ site_cfca_config.days | default(5475) }}"
 site_cfca_hostnames: "{{ site_cfca_config.hostnames | default(site_cfca_hostnames_default) | list | join(',') }}"
 site_cfca_key_size: "{{ site_cfca_config.key_size | default(256) }}"
 site_cfca_key_type: "{{ site_cfca_config.key_type | default('ecdsa') }}"
+
+cfca_package_state: latest

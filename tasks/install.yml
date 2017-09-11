@@ -11,7 +11,7 @@
 - name: Install CFCA
   apt:
     name: cfca
-    state: present
+    state: "{{ cfca_package_state }}"
     force: yes
 
 - name: Create directoriy and set permission
