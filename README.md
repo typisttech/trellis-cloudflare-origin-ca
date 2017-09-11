@@ -1,6 +1,7 @@
 # Trellis Cloudflare Origin CA
 
 [![Ansible Role](https://img.shields.io/ansible/role/20120.svg)](https://galaxy.ansible.com/TypistTech/trellis-cloudflare-origin-ca/)
+[![Build Status](https://travis-ci.org/TypistTech/trellis-cloudflare-origin-ca.svg?branch=master)](https://travis-ci.org/TypistTech/trellis-cloudflare-origin-ca)
 [![GitHub tag](https://img.shields.io/github/tag/TypistTech/trellis-cloudflare-origin-ca.svg)](https://github.com/TypistTech/trellis-cloudflare-origin-ca/tags)
 [![license](https://img.shields.io/github/license/TypistTech/trellis-cloudflare-origin-ca.svg)](https://github.com/TypistTech/trellis-cloudflare-origin-ca/blob/master/LICENSE)
 [![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.typist.tech/donate/sunny/)
