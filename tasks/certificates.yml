@@ -15,4 +15,3 @@
   no_log: true
   with_dict: "{{ wordpress_sites }}"
   when: item.key in sites_using_cloudflare_origin_ca
-  notify: reload nginx
