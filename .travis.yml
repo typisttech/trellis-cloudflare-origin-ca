@@ -4,6 +4,11 @@ python: 2.7
 
 sudo: false
 
+branches:
+  only:
+    - master
+    - /^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)$/
+
 cache: pip
 
 notifications:
