@@ -23,6 +23,11 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
   - [`vault_cloudflare_origin_ca_key` is not defined](#vault_cloudflare_origin_ca_key-is-not-defined)
   - [`example.com` is using Cloudflare Origin CA but OCSP stapling is enabled](#examplecom-is-using-cloudflare-origin-ca-but-ocsp-stapling-is-enabled)
   - [Nginx directories not included](#nginx-directories-not-included)
+- [FAQ](#faq)
+  - [Why use Cloudflare Origin CA?](#why-use-cloudflare-origin-ca)
+  - [What are the benefits of Cloudflare Origin CA over Let's Encrypt?](#what-are-the-benefits-of-cloudflare-origin-ca-over-lets-encrypt)
+  - [What are the benefits of Cloudflare Origin CA over other public certificates?](#what-are-the-benefits-of-cloudflare-origin-ca-over-other-public-certificates)
+  - [Why use 256-bit ECDSA key as default?](#why-use-256-bit-ecdsa-key-as-default)
 - [See Also](#see-also)
 - [Support!](#support)
   - [Donate via PayPal *](#donate-via-paypal-)
@@ -48,7 +53,7 @@ Add this role to `requirements.yml`:
 
 ```yaml
 - src: TypistTech.trellis-cloudflare-origin-ca # Case-sensitive!
-  version: 0.3.0 # Check for latest version!
+  version: 0.4.0 # Check for latest version!
 ```
 
 Run `$ ansible-galaxy install -r requirements.yml` to install this new role.
