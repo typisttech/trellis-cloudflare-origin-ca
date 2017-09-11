@@ -2,10 +2,10 @@
   shell: "cfca getcert \
     -key-out {{ item.key | quote }}.key \
     -certificate-out {{ item.key | quote }}.pem \
-    -days {{ site_cfca_days }} \
-    -hostnames {{ site_cfca_hostnames }} \
-    -key-size {{ site_cfca_key_size }} \
-    -key-type {{ site_cfca_key_type }}"
+    -days {{ site_cfca_config.days }} \
+    -hostnames {{ site_cfca_config.hostnames | join(',') }} \
+    -key-size {{ site_cfca_config.key_size }} \
+    -key-type {{ site_cfca_config.key_type }}"
   args:
     executable: "/bin/bash"
     chdir: "{{ nginx_ssl_path }}/cloudflare-origin-ca"
@@ -15,4 +15,3 @@
   no_log: true
   with_dict: "{{ wordpress_sites }}"
   when: item.key in sites_using_cloudflare_origin_ca
-  notify: reload nginx
