@@ -1,10 +1,11 @@
 sites_using_cloudflare_origin_ca: "[{% for name, site in wordpress_sites.iteritems() if site.ssl.enabled and site.ssl.provider | default('manual') == 'cloudflare-origin-ca' %}'{{ name }}',{% endfor %}]"
 
-site_cfca_hostnames_default: "{{ site_hosts | union(multisite_subdomains_wildcards) }}"
-site_cfca_config: "{{ item.value.cloudflare_origin_ca | default({}) }}"
-site_cfca_days: "{{ site_cfca_config.days | default(5475) }}"
-site_cfca_hostnames: "{{ site_cfca_config.hostnames | default(site_cfca_hostnames_default) | list | join(',') }}"
-site_cfca_key_size: "{{ site_cfca_config.key_size | default(256) }}"
-site_cfca_key_type: "{{ site_cfca_config.key_type | default('ecdsa') }}"
+site_cfca_config_default:
+  days: 5475
+  hostnames: "{{ site_hosts | union(multisite_subdomains_wildcards) }}"
+  key_size: 256
+  key_type: ecdsa
+
+site_cfca_config: "{{ site_cfca_config_default | combine(item.value.cloudflare_origin_ca | default({})) }}"
 
 cfca_package_state: latest
