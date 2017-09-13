@@ -21,4 +21,4 @@ install:
   - pip install ansible
 
 script:
-  - ansible-playbook -i tests/inventory --syntax-check tests/test.yml
+  - ansible-playbook -i 'localhost,' --syntax-check tests/test.yml
