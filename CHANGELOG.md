@@ -1,5 +1,14 @@
 # Change Log
 
+## [0.5.1](https://github.com/TypistTech/trellis-cloudflare-origin-ca/tree/0.5.1) (2017-09-13)
+[Full Changelog](https://github.com/TypistTech/trellis-cloudflare-origin-ca/compare/0.5.0...0.5.1)
+
+**Merged pull requests:**
+
+- Test: Remove tests/inventory [\#21](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/21) ([TangRufus](https://github.com/TangRufus))
+- Defer `update\_cache: yes` to `apt` task [\#20](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/20) ([TangRufus](https://github.com/TangRufus))
+- Do not force install `cfca` [\#19](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/19) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.5.0](https://github.com/TypistTech/trellis-cloudflare-origin-ca/tree/0.5.0) (2017-09-11)
 [Full Changelog](https://github.com/TypistTech/trellis-cloudflare-origin-ca/compare/0.4.0...0.5.0)
 
@@ -9,6 +18,7 @@
 
 **Merged pull requests:**
 
+- Version bump 0.5.0 [\#18](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/18) ([TangRufus](https://github.com/TangRufus))
 - Add changelog [\#17](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/17) ([TangRufus](https://github.com/TangRufus))
 - Refactor: tasks/certificates.yml [\#16](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/16) ([TangRufus](https://github.com/TangRufus))
 - Allow override package state and defaults to latest [\#15](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/15) ([TangRufus](https://github.com/TangRufus))

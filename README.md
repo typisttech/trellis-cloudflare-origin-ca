@@ -44,7 +44,7 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
 ## Requirements
 
 * [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) 2.3 or later
-* [Trellis](https://github.com/roots/trellis)
+* [Trellis@f2b8107](https://github.com/roots/trellis/commit/f2b81074c83475837e544a8aa5c3e909e760aa8a) or later
 * [Cloudflare](https://www.cloudflare.com/) account
 * Ubuntu 16.04 (Xenial)
 
@@ -54,7 +54,7 @@ Add this role to `requirements.yml`:
 
 ```yaml
 - src: TypistTech.trellis-cloudflare-origin-ca # Case-sensitive!
-  version: 0.5.0 # Check for latest version!
+  version: 0.5.1 # Check for latest version!
 ```
 
 Run `$ ansible-galaxy install -r requirements.yml` to install this new role.
