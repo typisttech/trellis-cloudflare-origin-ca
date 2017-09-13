@@ -6,12 +6,12 @@
 - name: Add Cloudflare PPA
   apt_repository:
     repo: 'deb http://pkg.cloudflare.com/ xenial main'
-    update_cache: yes
 
 - name: Install CFCA
   apt:
     name: cfca
     state: "{{ cfca_package_state }}"
+    update_cache: yes
     force: yes
 
 - name: Create directoriy and set permission
