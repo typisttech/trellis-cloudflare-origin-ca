@@ -4,13 +4,12 @@
     path: "{{ nginx_path }}/includes.d/{{ item.key }}"
     state: directory
     mode: 0755
-  with_dict: "{{ wordpress_sites }}"
-  when: item.key in sites_using_cloudflare_origin_ca
+  when: sites_using_cloudflare_origin_ca | count
 
 - name: Template Nginx SSL directives out to includes.d
   template:
     src: cloudflare-origin-ca.conf.j2
     dest: "{{ nginx_path }}/includes.d/{{ item.key }}/cloudflare-origin-ca.conf"
+  when: site_uses_cloudflare_origin_ca
   with_dict: "{{ wordpress_sites }}"
-  when: item.key in sites_using_cloudflare_origin_ca
   notify: reload nginx

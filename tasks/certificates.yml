@@ -13,5 +13,5 @@
   environment:
     CF_API_KEY: "{{ vault_cloudflare_origin_ca_key | mandatory }}"
   no_log: true
+  when: site_uses_cloudflare_origin_ca
   with_dict: "{{ wordpress_sites }}"
-  when: item.key in sites_using_cloudflare_origin_ca
