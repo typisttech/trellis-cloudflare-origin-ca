@@ -9,10 +9,11 @@
 
 - fail:
     msg: "{{ item.key }} is using Cloudflare Origin CA but OCSP stapling is enabled"
+  when:
+    - site_uses_cloudflare_origin_ca
+    - ssl_stapling_enabled
   with_dict: "{{ wordpress_sites }}"
-  when: item.key in sites_using_cloudflare_origin_ca and ssl_stapling_enabled
 
-- include: install.yml
+- include: setup.yml
 - include: certificates.yml
 - include: nginx.yml
-  tags: [nginx-includes, wordpress-setup-nginx]
