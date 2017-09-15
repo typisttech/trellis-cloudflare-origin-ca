@@ -28,6 +28,7 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
   - [What are the benefits of Cloudflare Origin CA over Let's Encrypt?](#what-are-the-benefits-of-cloudflare-origin-ca-over-lets-encrypt)
   - [What are the benefits of Cloudflare Origin CA over other public certificates?](#what-are-the-benefits-of-cloudflare-origin-ca-over-other-public-certificates)
   - [Why use 256-bit ECDSA key as default?](#why-use-256-bit-ecdsa-key-as-default)
+  - [Why Cloudflare Origin CA key is logged even `cloudflare_origin_ca_no_log` is `true`?](#why-cloudflare-origin-ca-key-is-logged-even-cloudflare_origin_ca_no_log-is-true)
 - [See Also](#see-also)
 - [Support!](#support)
   - [Donate via PayPal *](#donate-via-paypal-)
@@ -80,6 +81,12 @@ vault_cloudflare_origin_ca_key: v1.0-xxxxxxxxxxx
 # Choices: present|latest
 # Default: latest
 cfca_package_state: present
+
+# Whether to hide results of sensitive tasks which
+# may include Cloudflare Origin CA Key in plain text.
+# Choices: true|false
+# Default: false
+cloudflare_origin_ca_no_log: true
 
 # group_vars/<environment>/wordpress_sites.yml
 ##############################################
@@ -193,6 +200,12 @@ See [Introducing CloudFlare Origin CA](https://blog.cloudflare.com/cloudflare-ca
 > --- Cloudflare Support
 
 If you insist to use RSA keys, make sure you set `key_size` to at least `2048`.
+
+### Why Cloudflare Origin CA key is logged even `cloudflare_origin_ca_no_log` is `true`?
+
+> Note that the use of the `no_log` attribute does not prevent data from being shown when debugging Ansible itself via the `ANSIBLE_DEBUG` environment variable.
+>
+> [Ansible Docs](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-keep-secret-data-in-my-playbook)
 
 ## See Also
 
