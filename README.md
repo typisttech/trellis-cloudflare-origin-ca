@@ -164,6 +164,12 @@ Cloudflare Origin CA doesn't support OCSP stapling. Disable OCSP stapling for al
 
 Make sure you have [roots/trellis@f2b8107](https://github.com/roots/trellis/commit/f2b81074c83475837e544a8aa5c3e909e760aa8a) or later.
 
+## Known Issues
+
+**Help Wanted!** Pull requests are welcome.
+
+- Cloudflare Origin CA key is logged even `no_log` is `true`. It happens when Ansible verbosity is high enough.
+
 ## FAQ
 
 ### Why use Cloudflare Origin CA?
