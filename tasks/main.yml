@@ -11,7 +11,7 @@
     msg: "{{ item.key }} is using Cloudflare Origin CA but OCSP stapling is enabled"
   when:
     - site_uses_cloudflare_origin_ca
-    - ssl_stapling_enabled
+    - item.value.ssl.stapling_enabled | default(true)
   with_dict: "{{ wordpress_sites }}"
 
 - include: setup.yml

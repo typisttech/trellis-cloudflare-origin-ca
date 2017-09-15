@@ -4,7 +4,8 @@
     path: "{{ nginx_path }}/includes.d/{{ item.key }}"
     state: directory
     mode: 0755
-  when: sites_using_cloudflare_origin_ca | count
+  when: site_uses_cloudflare_origin_ca
+  with_dict: "{{ wordpress_sites }}"
 
 - name: Template Nginx SSL directives out to includes.d
   template:
