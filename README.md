@@ -55,7 +55,7 @@ Add this role to `requirements.yml`:
 
 ```yaml
 - src: TypistTech.trellis-cloudflare-origin-ca # Case-sensitive!
-  version: 0.5.1 # Check for latest version!
+  version: 0.6.0 # Check for latest version!
 ```
 
 Run `$ ansible-galaxy install -r requirements.yml` to install this new role.
@@ -68,8 +68,8 @@ Run `$ ansible-galaxy install -r requirements.yml` to install this new role.
 ##########################################################################
 
 # Cloudflare Origin CA Key
-## Not to confuse with Cloudflare Global API Key
-## See: https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#iiobtainyourcertificateapitoken
+# Not to confuse with Cloudflare Global API Key
+# See: https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#iiobtainyourcertificateapitoken
 vault_cloudflare_origin_ca_key: v1.0-xxxxxxxxxxx
 
 # group_vars/<environment>/main.yml

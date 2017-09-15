@@ -1,10 +1,21 @@
 # Change Log
 
+## [0.6.0](https://github.com/TypistTech/trellis-cloudflare-origin-ca/tree/0.6.0) (2017-09-15)
+[Full Changelog](https://github.com/TypistTech/trellis-cloudflare-origin-ca/compare/0.5.1...0.6.0)
+
+**Merged pull requests:**
+
+- Add `cloudflare\_origin\_ca\_no\_log` and defaults to `false` [\#27](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/27) ([TangRufus](https://github.com/TangRufus))
+- Fix syntax errors [\#25](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/25) ([TangRufus](https://github.com/TangRufus))
+- Adjust code style to make it more like trellis/letsencrypt role [\#24](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/24) ([TangRufus](https://github.com/TangRufus))
+- Fix: Incorrect link [\#23](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/23) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.5.1](https://github.com/TypistTech/trellis-cloudflare-origin-ca/tree/0.5.1) (2017-09-13)
 [Full Changelog](https://github.com/TypistTech/trellis-cloudflare-origin-ca/compare/0.5.0...0.5.1)
 
 **Merged pull requests:**
 
+- Version bump 0.5.1 [\#22](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/22) ([TangRufus](https://github.com/TangRufus))
 - Test: Remove tests/inventory [\#21](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/21) ([TangRufus](https://github.com/TangRufus))
 - Defer `update\_cache: yes` to `apt` task [\#20](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/20) ([TangRufus](https://github.com/TangRufus))
 - Do not force install `cfca` [\#19](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/19) ([TangRufus](https://github.com/TangRufus))
