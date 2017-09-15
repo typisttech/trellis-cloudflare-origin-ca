@@ -10,3 +10,4 @@ site_cfca_config_default:
 site_cfca_config: "{{ site_cfca_config_default | combine(item.value.cloudflare_origin_ca | default({})) }}"
 
 cfca_package_state: latest
+cloudflare_origin_ca_no_log: false
