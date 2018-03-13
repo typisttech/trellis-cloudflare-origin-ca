@@ -29,6 +29,7 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
   - [What are the benefits of Cloudflare Origin CA over other public certificates?](#what-are-the-benefits-of-cloudflare-origin-ca-over-other-public-certificates)
   - [Why use 256-bit ECDSA key as default?](#why-use-256-bit-ecdsa-key-as-default)
   - [Why Cloudflare Origin CA key is logged even `cloudflare_origin_ca_no_log` is `true`?](#why-cloudflare-origin-ca-key-is-logged-even-cloudflare_origin_ca_no_log-is-true)
+  - [Does Cloudflare Origin CA perfect?](#does-cloudflare-origin-ca-perfect)
 - [See Also](#see-also)
 - [Support!](#support)
   - [Donate via PayPal *](#donate-via-paypal-)
@@ -206,6 +207,12 @@ If you insist to use RSA keys, make sure you set `key_size` to at least `2048`.
 > Note that the use of the `no_log` attribute does not prevent data from being shown when debugging Ansible itself via the `ANSIBLE_DEBUG` environment variable.
 >
 > [Ansible Docs](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-keep-secret-data-in-my-playbook)
+
+### Does Cloudflare Origin CA perfect?
+
+* [Reddit discussion](https://www.reddit.com/r/Monero/comments/73y93c/localmoneroco_uses_cloudflare_which_is_insecure/)
+* [CloudFlare, We Have A Problem](http://cryto.net/~joepie91/blog/2016/07/14/cloudflare-we-have-a-problem/)
+* [On Cloudflare](https://www.tyil.nl/articles/on-cloudflare/)
 
 ## See Also
 
