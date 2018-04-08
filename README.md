@@ -135,7 +135,7 @@ Add this role to `server.yml` **immediately after** `role: wordpress-setup`:
 roles:
     # Some other Trellis roles ...
     - { role: wordpress-setup, tags: [wordpress, wordpress-setup, letsencrypt, cloudflare-origin-ca] }
-    - { role: TypistTech.trellis-cloudflare-origin-ca, tags: [cloudflare-origin-ca, wordpress-setup], when: sites_using_cloudflare_origin_ca | count }
+    - { role: cloudflare-origin-ca, tags: [cloudflare-origin-ca, wordpress-setup], when: sites_using_cloudflare_origin_ca | count }
     # Some other Trellis roles ...
 ```
 
