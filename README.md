@@ -188,10 +188,10 @@ Fact:
 This role has nothing to do with authenticated origin pulls or `ssl_verify_client`.
 
 Solution:
-1. Read [Introducing CloudFlare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates)
+1. Read [Introducing Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates)
 1. Read [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617)
-1. Understand this role is CloudFlare Origin CA
-1. Understand CloudFlare Origin CA and Authenticated Origin Pulls are 2 different things
+1. Understand this role is Cloudflare Origin CA
+1. Understand Cloudflare Origin CA and Authenticated Origin Pulls are 2 different things
 1. Read [#34](https://github.com/TypistTech/trellis-cloudflare-origin-ca/issues/3
 1. Contact Cloudflare support if you still have questions
 
@@ -202,7 +202,7 @@ Solution:
 Short answer: To keep connection between Cloudflare and your severs private and secure from tampering.
 
 Long answer:
-> CloudFlare’s Flexible SSL mode is the default for CloudFlare sites on the Free plan. Flexible SSL mode means that traffic from browsers to CloudFlare will be encrypted, but traffic from CloudFlare to a site's origin server will not be. To take advantage of our [Full and Strict SSL](https://www.cloudflare.com/ssl) mode—which encrypts the connection between CloudFlare and the origin server—it’s necessary to install a certificate on the origin server.
+> Cloudflare’s Flexible SSL mode is the default for Cloudflare sites on the Free plan. Flexible SSL mode means that traffic from browsers to Cloudflare will be encrypted, but traffic from Cloudflare to a site's origin server will not be. To take advantage of our [Full and Strict SSL](https://www.cloudflare.com/ssl) mode—which encrypts the connection between Cloudflare and the origin server—it’s necessary to install a certificate on the origin server.
 >
 > Cloudflare Blog - [Origin Server Connection Security with Universal SS ](https://blog.cloudflare.com/origin-server-connection-security-with-universal-ssl/)
 
@@ -212,7 +212,7 @@ To get certificates from [Let's Encrypt](https://letsencrypt.org/), you have to 
 
 ### What are the benefits of Cloudflare Origin CA over other public certificates?
 
-See [Introducing CloudFlare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates) on Cloudflare blog.
+See [Introducing Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates) on Cloudflare blog.
 
 ### Why use 256-bit ECDSA key as default?
 
@@ -234,16 +234,16 @@ If you insist to use RSA keys, make sure you set `key_size` to at least `2048`.
 ### Does Cloudflare Origin CA perfect?
 
 * [Reddit discussion](https://www.reddit.com/r/Monero/comments/73y93c/localmoneroco_uses_cloudflare_which_is_insecure/)
-* [CloudFlare, We Have A Problem](http://cryto.net/~joepie91/blog/2016/07/14/cloudflare-we-have-a-problem/)
+* [Cloudflare, We Have A Problem](http://cryto.net/~joepie91/blog/2016/07/14/cloudflare-we-have-a-problem/)
 * [On Cloudflare](https://www.tyil.nl/articles/on-cloudflare/)
 
 ## See Also
 
-* [Sunny](https://wordpress.org/plugins/sunny/) - Automatically purge CloudFlare cache, including cache everything rules
+* [Sunny](https://wordpress.org/plugins/sunny/) - Automatically purge Cloudflare cache, including cache everything rules
 * [WP Cloudflare Guard](https://wordpress.org/plugins/wp-cloudflare-guard/) - Connecting WordPress with Cloudflare firewall, protect your WordPress site at DNS level. Automatically create firewall rules to block dangerous IPs
 * The [Root](https://github.com/roots/trellis/issues/868) of Trellis Cloudflare Origin CA
 * The [Origin](https://github.com/roots/trellis/pull/870) of Trellis Cloudflare Origin CA
-* [CloudFlare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/)
+* [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/)
 * [Trellis SSL](https://roots.io/trellis/docs/ssl/)
 * [Trellis Nginx Includes](https://roots.io/trellis/docs/nginx-includes/)
 * [Ansible Vault](https://roots.io/trellis/docs/vault/)
