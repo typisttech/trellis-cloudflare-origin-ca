@@ -23,6 +23,7 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
   - [`vault_cloudflare_origin_ca_key` is not defined](#vault_cloudflare_origin_ca_key-is-not-defined)
   - [`example.com` is using Cloudflare Origin CA but OCSP stapling is enabled](#examplecom-is-using-cloudflare-origin-ca-but-ocsp-stapling-is-enabled)
   - [Nginx directories not included](#nginx-directories-not-included)
+  - [400 Bad Request - No required SSL certificate was sent](#400-bad-request---no-required-ssl-certificate-was-sent)
 - [FAQ](#faq)
   - [Why use Cloudflare Origin CA?](#why-use-cloudflare-origin-ca)
   - [What are the benefits of Cloudflare Origin CA over Let's Encrypt?](#what-are-the-benefits-of-cloudflare-origin-ca-over-lets-encrypt)
@@ -31,6 +32,7 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
   - [Why Cloudflare Origin CA key is logged even `cloudflare_origin_ca_no_log` is `true`?](#why-cloudflare-origin-ca-key-is-logged-even-cloudflare_origin_ca_no_log-is-true)
   - [Does Cloudflare Origin CA perfect?](#does-cloudflare-origin-ca-perfect)
 - [See Also](#see-also)
+  - [It looks awesome. Where can I find some more goodies like this?](#it-looks-awesome-where-can-i-find-some-more-goodies-like-this)
 - [Support!](#support)
   - [Donate via PayPal *](#donate-via-paypal-)
   - [Why don't you hire me?](#why-dont-you-hire-me)
@@ -172,6 +174,30 @@ Cloudflare Origin CA doesn't support OCSP stapling. Disable OCSP stapling for al
 
 Make sure you have [roots/trellis@f2b8107](https://github.com/roots/trellis/commit/f2b81074c83475837e544a8aa5c3e909e760aa8a) or later.
 
+### 400 Bad Request - No required SSL certificate was sent
+
+Symptoms:
+* Server returns "400 Bad Request - No required SSL certificate was sent" for all requests
+* Nginx logged "client sent no required SSL certificate while reading client request headers, client: [redacted], server:[redacted], request: "GET / HTTP/1.1", host: "[redacted]""
+* `ssl_verify_client on;` somewhere in Nginx config files
+* Using `client_cert_url` in `wordpress_sites.yml`, i.e: [roots/trellis#869](https://github.com/roots/trellis/pull/869)
+
+Culprit:
+
+Your [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617) configuration is incorrect.
+
+Fact:
+
+This role has nothing to do with Authenticated Origin Pulls or `ssl_verify_client`.
+
+Solution:
+1. Read [Introducing Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates)
+1. Read [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617)
+1. Understand this role is Cloudflare Origin CA
+1. Understand Cloudflare Origin CA and Authenticated Origin Pulls are 2 different things
+1. Read [#34](https://github.com/TypistTech/trellis-cloudflare-origin-ca/issues/3)
+1. Contact Cloudflare support if you still have questions
+
 ## FAQ
 
 ### Why use Cloudflare Origin CA?
@@ -179,7 +205,7 @@ Make sure you have [roots/trellis@f2b8107](https://github.com/roots/trellis/comm
 Short answer: To keep connection between Cloudflare and your severs private and secure from tampering.
 
 Long answer:
-> CloudFlare’s Flexible SSL mode is the default for CloudFlare sites on the Free plan. Flexible SSL mode means that traffic from browsers to CloudFlare will be encrypted, but traffic from CloudFlare to a site's origin server will not be. To take advantage of our [Full and Strict SSL](https://www.cloudflare.com/ssl) mode—which encrypts the connection between CloudFlare and the origin server—it’s necessary to install a certificate on the origin server.
+> Cloudflare’s Flexible SSL mode is the default for Cloudflare sites on the Free plan. Flexible SSL mode means that traffic from browsers to Cloudflare will be encrypted, but traffic from Cloudflare to a site's origin server will not be. To take advantage of our [Full and Strict SSL](https://www.cloudflare.com/ssl) mode—which encrypts the connection between Cloudflare and the origin server—it’s necessary to install a certificate on the origin server.
 >
 > Cloudflare Blog - [Origin Server Connection Security with Universal SS ](https://blog.cloudflare.com/origin-server-connection-security-with-universal-ssl/)
 
@@ -189,7 +215,7 @@ To get certificates from [Let's Encrypt](https://letsencrypt.org/), you have to 
 
 ### What are the benefits of Cloudflare Origin CA over other public certificates?
 
-See [Introducing CloudFlare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates) on Cloudflare blog.
+See [Introducing Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates) on Cloudflare blog.
 
 ### Why use 256-bit ECDSA key as default?
 
@@ -206,21 +232,30 @@ If you insist to use RSA keys, make sure you set `key_size` to at least `2048`.
 
 > Note that the use of the `no_log` attribute does not prevent data from being shown when debugging Ansible itself via the `ANSIBLE_DEBUG` environment variable.
 >
-> [Ansible Docs](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-keep-secret-data-in-my-playbook)
+> --- [Ansible Docs](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-keep-secret-data-in-my-playbook)
 
 ### Does Cloudflare Origin CA perfect?
 
 * [Reddit discussion](https://www.reddit.com/r/Monero/comments/73y93c/localmoneroco_uses_cloudflare_which_is_insecure/)
-* [CloudFlare, We Have A Problem](http://cryto.net/~joepie91/blog/2016/07/14/cloudflare-we-have-a-problem/)
+* [Cloudflare, We Have A Problem](http://cryto.net/~joepie91/blog/2016/07/14/cloudflare-we-have-a-problem/)
 * [On Cloudflare](https://www.tyil.nl/articles/on-cloudflare/)
+
+### It looks awesome. Where can I find some more goodies like this?
+
+* Articles on Typist Tech's [blog](https://typist.tech)
+* [Tang Rufus' WordPress plugins](https://profiles.wordpress.org/tangrufus#content-plugins) on wp.org
+* More projects on [Typist Tech's GitHub profile](https://github.com/TypistTech)
+* Stay tuned on [Typist Tech's newsletter](https://typist.tech/go/newsletter)
+* Follow [Tang Rufus' Twitter account](https://twitter.com/TangRufus)
+* Hire [Tang Rufus](https://typist.tech/contact) to build your next awesome site
 
 ## See Also
 
-* [Sunny](https://wordpress.org/plugins/sunny/) - Automatically purge CloudFlare cache, including cache everything rules
+* [Sunny](https://wordpress.org/plugins/sunny/) - Automatically purge Cloudflare cache, including cache everything rules
 * [WP Cloudflare Guard](https://wordpress.org/plugins/wp-cloudflare-guard/) - Connecting WordPress with Cloudflare firewall, protect your WordPress site at DNS level. Automatically create firewall rules to block dangerous IPs
 * The [Root](https://github.com/roots/trellis/issues/868) of Trellis Cloudflare Origin CA
 * The [Origin](https://github.com/roots/trellis/pull/870) of Trellis Cloudflare Origin CA
-* [CloudFlare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/)
+* [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/)
 * [Trellis SSL](https://roots.io/trellis/docs/ssl/)
 * [Trellis Nginx Includes](https://roots.io/trellis/docs/nginx-includes/)
 * [Ansible Vault](https://roots.io/trellis/docs/vault/)
