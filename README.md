@@ -177,23 +177,25 @@ Make sure you have [roots/trellis@f2b8107](https://github.com/roots/trellis/comm
 ### 400 Bad Request - No required SSL certificate was sent
 
 Symptoms:
-- Server returns "400 Bad Request - No required SSL certificate was sent" for all requests
-- Nginx logged "client sent no required SSL certificate while reading client request headers, client: [redacted], server:[redacted], request: "GET / HTTP/1.1", host: "[redacted]""
-- `ssl_verify_client on;` somewhere in Nginx config files
-- Using `client_cert_url` in `wordpress_sites.yml`, i.e: [roots/trellis#869](https://github.com/roots/trellis/pull/869)
+* Server returns "400 Bad Request - No required SSL certificate was sent" for all requests
+* Nginx logged "client sent no required SSL certificate while reading client request headers, client: [redacted], server:[redacted], request: "GET / HTTP/1.1", host: "[redacted]""
+* `ssl_verify_client on;` somewhere in Nginx config files
+* Using `client_cert_url` in `wordpress_sites.yml`, i.e: [roots/trellis#869](https://github.com/roots/trellis/pull/869)
 
 Culprit:
-Your ["Authenticated Origin Pulls"](https://support.cloudflare.com/hc/en-us/articles/204899617) configuration is incorrect.
+
+Your [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617) configuration is incorrect.
 
 Fact:
-This role has nothing to do with authenticated origin pulls or `ssl_verify_client`.
+
+This role has nothing to do with Authenticated Origin Pulls or `ssl_verify_client`.
 
 Solution:
 1. Read [Introducing Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates)
 1. Read [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617)
 1. Understand this role is Cloudflare Origin CA
 1. Understand Cloudflare Origin CA and Authenticated Origin Pulls are 2 different things
-1. Read [#34](https://github.com/TypistTech/trellis-cloudflare-origin-ca/issues/3
+1. Read [#34](https://github.com/TypistTech/trellis-cloudflare-origin-ca/issues/3)
 1. Contact Cloudflare support if you still have questions
 
 ## FAQ
@@ -230,13 +232,22 @@ If you insist to use RSA keys, make sure you set `key_size` to at least `2048`.
 
 > Note that the use of the `no_log` attribute does not prevent data from being shown when debugging Ansible itself via the `ANSIBLE_DEBUG` environment variable.
 >
-> [Ansible Docs](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-keep-secret-data-in-my-playbook)
+> --- [Ansible Docs](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-keep-secret-data-in-my-playbook)
 
 ### Does Cloudflare Origin CA perfect?
 
 * [Reddit discussion](https://www.reddit.com/r/Monero/comments/73y93c/localmoneroco_uses_cloudflare_which_is_insecure/)
 * [Cloudflare, We Have A Problem](http://cryto.net/~joepie91/blog/2016/07/14/cloudflare-we-have-a-problem/)
 * [On Cloudflare](https://www.tyil.nl/articles/on-cloudflare/)
+
+### It looks awesome. Where can I find some more goodies like this?
+
+* Articles on Typist Tech's [blog](https://typist.tech)
+* [Tang Rufus' WordPress plugins](https://profiles.wordpress.org/tangrufus#content-plugins) on wp.org
+* More projects on [Typist Tech's GitHub profile](https://github.com/TypistTech)
+* Stay tuned on [Typist Tech's newsletter](https://typist.tech/go/newsletter)
+* Follow [Tang Rufus' Twitter account](https://twitter.com/TangRufus)
+* Hire [Tang Rufus](https://typist.tech/contact) to build your next awesome site
 
 ## See Also
 
@@ -248,15 +259,6 @@ If you insist to use RSA keys, make sure you set `key_size` to at least `2048`.
 * [Trellis SSL](https://roots.io/trellis/docs/ssl/)
 * [Trellis Nginx Includes](https://roots.io/trellis/docs/nginx-includes/)
 * [Ansible Vault](https://roots.io/trellis/docs/vault/)
-
-### It looks awesome. Where can I find some more goodies like this?
-
-* Articles on Typist Tech's [blog](https://typist.tech)
-* [Tang Rufus' WordPress plugins](https://profiles.wordpress.org/tangrufus#content-plugins) on wp.org
-* More projects on [Typist Tech's GitHub profile](https://github.com/TypistTech)
-* Stay tuned on [Typist Tech's newsletter](https://typist.tech/go/newsletter)
-* Follow [Tang Rufus' Twitter account](https://twitter.com/TangRufus)
-* Hire [Tang Rufus](https://typist.tech/contact) to build your next awesome site
 
 ## Support!
 
