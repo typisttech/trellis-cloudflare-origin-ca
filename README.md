@@ -23,6 +23,7 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
   - [`vault_cloudflare_origin_ca_key` is not defined](#vault_cloudflare_origin_ca_key-is-not-defined)
   - [`example.com` is using Cloudflare Origin CA but OCSP stapling is enabled](#examplecom-is-using-cloudflare-origin-ca-but-ocsp-stapling-is-enabled)
   - [Nginx directories not included](#nginx-directories-not-included)
+  - [400 Bad Request - No required SSL certificate was sent](#400-bad-request---no-required-ssl-certificate-was-sent)
 - [FAQ](#faq)
   - [Why use Cloudflare Origin CA?](#why-use-cloudflare-origin-ca)
   - [What are the benefits of Cloudflare Origin CA over Let's Encrypt?](#what-are-the-benefits-of-cloudflare-origin-ca-over-lets-encrypt)
@@ -171,6 +172,28 @@ Cloudflare Origin CA doesn't support OCSP stapling. Disable OCSP stapling for al
 ### Nginx directories not included
 
 Make sure you have [roots/trellis@f2b8107](https://github.com/roots/trellis/commit/f2b81074c83475837e544a8aa5c3e909e760aa8a) or later.
+
+### 400 Bad Request - No required SSL certificate was sent
+
+Symptoms:
+- Server returns "400 Bad Request - No required SSL certificate was sent" for all requests
+- Nginx logged "client sent no required SSL certificate while reading client request headers, client: [redacted], server:[redacted], request: "GET / HTTP/1.1", host: "[redacted]""
+- `ssl_verify_client on;` somewhere in Nginx config files
+- Using `client_cert_url` in `wordpress_sites.yml`, i.e: [roots/trellis#869](https://github.com/roots/trellis/pull/869)
+
+Culprit:
+Your ["Authenticated Origin Pulls"](https://support.cloudflare.com/hc/en-us/articles/204899617) configuration is incorrect.
+
+Fact:
+This role has nothing to do with authenticated origin pulls or `ssl_verify_client`.
+
+Solution:
+1. Read [Introducing CloudFlare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates)
+1. Read [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617)
+1. Understand this role is CloudFlare Origin CA
+1. Understand CloudFlare Origin CA and Authenticated Origin Pulls are 2 different things
+1. Read [#34](https://github.com/TypistTech/trellis-cloudflare-origin-ca/issues/3
+1. Contact Cloudflare support if you still have questions
 
 ## FAQ
 
