@@ -32,6 +32,7 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
   - [Why Cloudflare Origin CA key is logged even `cloudflare_origin_ca_no_log` is `true`?](#why-cloudflare-origin-ca-key-is-logged-even-cloudflare_origin_ca_no_log-is-true)
   - [Does Cloudflare Origin CA perfect?](#does-cloudflare-origin-ca-perfect)
 - [See Also](#see-also)
+  - [It looks awesome. Where can I find some more goodies like this?](#it-looks-awesome-where-can-i-find-some-more-goodies-like-this)
 - [Support!](#support)
   - [Donate via PayPal *](#donate-via-paypal-)
   - [Why don't you hire me?](#why-dont-you-hire-me)
@@ -247,6 +248,15 @@ If you insist to use RSA keys, make sure you set `key_size` to at least `2048`.
 * [Trellis SSL](https://roots.io/trellis/docs/ssl/)
 * [Trellis Nginx Includes](https://roots.io/trellis/docs/nginx-includes/)
 * [Ansible Vault](https://roots.io/trellis/docs/vault/)
+
+### It looks awesome. Where can I find some more goodies like this?
+
+* Articles on Typist Tech's [blog](https://typist.tech)
+* [Tang Rufus' WordPress plugins](https://profiles.wordpress.org/tangrufus#content-plugins) on wp.org
+* More projects on [Typist Tech's GitHub profile](https://github.com/TypistTech)
+* Stay tuned on [Typist Tech's newsletter](https://typist.tech/go/newsletter)
+* Follow [Tang Rufus' Twitter account](https://twitter.com/TangRufus)
+* Hire [Tang Rufus](https://typist.tech/contact) to build your next awesome site
 
 ## Support!
 
