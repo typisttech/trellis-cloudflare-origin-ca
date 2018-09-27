@@ -238,7 +238,7 @@ If you insist to use RSA keys, make sure you set `key_size` to at least `2048`.
 
 * [Reddit discussion](https://www.reddit.com/r/Monero/comments/73y93c/localmoneroco_uses_cloudflare_which_is_insecure/)
 * [Cloudflare, We Have A Problem](http://cryto.net/~joepie91/blog/2016/07/14/cloudflare-we-have-a-problem/)
-* [On Cloudflare](https://www.tyil.nl/articles/on-cloudflare/)
+* [On Cloudflare](https://www.tyil.nl/post/2017/12/17/on-cloudflare/)
 
 ### It looks awesome. Where can I find some more goodies like this?
 
