@@ -1,10 +1,27 @@
 # Change Log
 
+## [0.7.0](https://github.com/TypistTech/trellis-cloudflare-origin-ca/tree/0.7.0) (2019-01-06)
+[Full Changelog](https://github.com/TypistTech/trellis-cloudflare-origin-ca/compare/0.6.0...0.7.0)
+
+**Closed issues:**
+
+- Config location is cleaned on each provision [\#31](https://github.com/TypistTech/trellis-cloudflare-origin-ca/issues/31)
+- Add note about Cloudflare security issues [\#30](https://github.com/TypistTech/trellis-cloudflare-origin-ca/issues/30)
+
+**Merged pull requests:**
+
+- Fix for python3 update [\#37](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/37) ([partounian](https://github.com/partounian))
+- Readme: Fix broken link [\#36](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/36) ([TangRufus](https://github.com/TangRufus))
+- Readme: Clarify Authenticated Origin Pulls [\#35](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/35) ([TangRufus](https://github.com/TangRufus))
+- Readme: Add note about Cloudflare security issues [\#32](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/32) ([TangRufus](https://github.com/TangRufus))
+- Respect `apt\_cache\_valid\_time` [\#29](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/29) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.6.0](https://github.com/TypistTech/trellis-cloudflare-origin-ca/tree/0.6.0) (2017-09-15)
 [Full Changelog](https://github.com/TypistTech/trellis-cloudflare-origin-ca/compare/0.5.1...0.6.0)
 
 **Merged pull requests:**
 
+- Version bump 0.6.0 [\#28](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/28) ([TangRufus](https://github.com/TangRufus))
 - Add `cloudflare\_origin\_ca\_no\_log` and defaults to `false` [\#27](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/27) ([TangRufus](https://github.com/TangRufus))
 - Fix syntax errors [\#25](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/25) ([TangRufus](https://github.com/TangRufus))
 - Adjust code style to make it more like trellis/letsencrypt role [\#24](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/24) ([TangRufus](https://github.com/TangRufus))
