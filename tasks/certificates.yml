@@ -1,5 +1,5 @@
 - name: Generate Cloudflare Origin CA
-  shell: "cfca getcert \
+  command: "cfca getcert \
     -key-out {{ item.key | quote }}.key \
     -certificate-out {{ item.key | quote }}.pem \
     -days {{ site_cfca_config.days }} \

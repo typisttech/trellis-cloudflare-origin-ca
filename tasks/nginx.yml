@@ -11,6 +11,7 @@
   template:
     src: cloudflare-origin-ca.conf.j2
     dest: "{{ nginx_path }}/includes.d/{{ item.key }}/cloudflare-origin-ca.conf"
+    mode: '0600'
   when: site_uses_cloudflare_origin_ca
   with_dict: "{{ wordpress_sites }}"
   notify: reload nginx

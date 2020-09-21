@@ -1,13 +1,16 @@
 ---
-- fail:
+- name: Fail if no site is using Cloudflare Origin CA
+  fail:
     msg: No site is using Cloudflare Origin CA
   when: sites_using_cloudflare_origin_ca | count < 1
 
-- fail:
+- name: Fail if vault_cloudflare_origin_ca_key is not defined
+  fail:
     msg: vault_cloudflare_origin_ca_key is not defined
   when: vault_cloudflare_origin_ca_key is not defined
 
-- fail:
+- name: Fail if OCSP stapling is enabled
+  fail:
     msg: "{{ item.key }} is using Cloudflare Origin CA but OCSP stapling is enabled"
   when:
     - site_uses_cloudflare_origin_ca

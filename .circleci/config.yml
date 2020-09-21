@@ -1,0 +1,59 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@1.0.0
+
+jobs:
+  syntax-check:
+    parameters:
+      ansible-version:
+        type: string
+    executor: python/default
+    steps:
+      - run: python --version
+      - run: pip -V
+      - checkout
+      - restore_cache:
+          keys:
+            - syntax-check-pip-<<parameters.ansible-version>>-{{ .Branch }}-
+            - syntax-check-pip-<<parameters.ansible-version>>-
+      - run: pip install --upgrade ansible<< parameters.ansible-version >>
+      - save_cache:
+          key: syntax-check-pip-<<parameters.ansible-version>>-{{ .Branch }}-{{ epoch }}-
+          paths:
+            - /home/circleci/.cache/pip
+            - /home/circleci/.pyenv/versions/
+            - /home/circleci/.local/lib/
+      - run: ansible --version
+      - run: ansible-playbook -i 'localhost,' --syntax-check tests/test.yml
+
+  lint:
+    executor: python/default
+    steps:
+      - run: python --version
+      - run: pip -V
+      - checkout
+      - restore_cache:
+          keys:
+            - lint-pip-{{ .Branch }}-
+            - lint-pip-
+      - run: pip install --upgrade ansible-lint
+      - save_cache:
+          key: lint-pip-{{ .Branch }}-{{ epoch }}-
+          paths:
+            - /home/circleci/.cache/pip
+            - /home/circleci/.pyenv/versions/
+            - /home/circleci/.local/lib/
+      - run: ansible-lint --version
+      - run: ansible-lint .
+
+workflows:
+  syntax-check-and-lint:
+    jobs:
+      - syntax-check:
+          name: syntax-check-ansible-<<matrix.ansible-version>>
+          matrix:
+            parameters:
+              # Empty string means latest
+              ansible-version: ["", "~=2.9.0", "~=2.8.0"]
+      - lint
