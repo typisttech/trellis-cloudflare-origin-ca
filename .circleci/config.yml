@@ -45,7 +45,7 @@ jobs:
             - /home/circleci/.pyenv/versions/
             - /home/circleci/.local/lib/
       - run: ansible-lint --version
-      - run: ansible-lint .
+      - run: ansible-lint -vv .
 
 workflows:
   syntax-check-and-lint:
