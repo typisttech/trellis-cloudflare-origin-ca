@@ -55,5 +55,5 @@ workflows:
           matrix:
             parameters:
               # Empty string means latest
-              ansible-version: ["", "~=2.9.0", "~=2.8.0"]
+              ansible-version: ["", "~=2.10.0", "~=2.9.0", "~=2.8.0"]
       - lint
