@@ -3,7 +3,7 @@
   file:
     path: "{{ nginx_path }}/includes.d/{{ item.key }}"
     state: directory
-    mode: 0755
+    mode: '0755'
   when: site_uses_cloudflare_origin_ca | bool
   with_dict: "{{ wordpress_sites }}"
 

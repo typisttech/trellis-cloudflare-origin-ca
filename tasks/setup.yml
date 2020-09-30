@@ -17,5 +17,5 @@
 - name: Create directoriy and set permission
   file:
     path: "{{ nginx_ssl_path }}/cloudflare-origin-ca"
-    mode: 0700
+    mode: '0700'
     state: directory
