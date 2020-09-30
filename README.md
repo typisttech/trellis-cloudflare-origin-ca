@@ -1,7 +1,6 @@
 # Trellis Cloudflare Origin CA
 
 [![Ansible Role](https://img.shields.io/ansible/role/20120.svg)](https://galaxy.ansible.com/TypistTech/trellis-cloudflare-origin-ca/)
-[![Build Status](https://travis-ci.org/TypistTech/trellis-cloudflare-origin-ca.svg?branch=master)](https://travis-ci.org/TypistTech/trellis-cloudflare-origin-ca)
 [![GitHub tag](https://img.shields.io/github/tag/TypistTech/trellis-cloudflare-origin-ca.svg)](https://github.com/TypistTech/trellis-cloudflare-origin-ca/tags)
 [![license](https://img.shields.io/github/license/TypistTech/trellis-cloudflare-origin-ca.svg)](https://github.com/TypistTech/trellis-cloudflare-origin-ca/blob/master/LICENSE)
 [![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.typist.tech/donate/trellis-cloudflare-origin-ca/)
@@ -38,7 +37,6 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
   - [Why don't you hire me?](#why-dont-you-hire-me)
   - [Want to help in other way? Want to be a sponsor?](#want-to-help-in-other-way-want-to-be-a-sponsor)
 - [Feedback](#feedback)
-- [Change log](#change-log)
 - [Author Information](#author-information)
 - [Contributing](#contributing)
 - [License](#license)
@@ -47,7 +45,7 @@ Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-
 
 ## Requirements
 
-* [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) 2.3 or later
+* [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) 2.8 or later
 * [Trellis@f2b8107](https://github.com/roots/trellis/commit/f2b81074c83475837e544a8aa5c3e909e760aa8a) or later
 * [Cloudflare](https://www.cloudflare.com/) account
 * Ubuntu 16.04 (Xenial)
@@ -279,10 +277,6 @@ Contact: [Tang Rufus](mailto:tangrufus@gmail.com)
 **Please provide feedback!** We want to make this library useful in as many projects as possible.
 Please submit an [issue](https://github.com/TypistTech/trellis-cloudflare-origin-ca/issues/new) and point out what you do and don't like, or fork the project and make suggestions.
 **No issue is too small.**
-
-## Change log
-
-Please see [CHANGELOG](./CHANGELOG.md) for more information on what has changed recently.
 
 ## Author Information
 
