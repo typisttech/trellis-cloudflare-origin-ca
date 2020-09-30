@@ -25,7 +25,7 @@ jobs:
             - /home/circleci/.pyenv/versions/
             - /home/circleci/.local/lib/
       - run: ansible --version
-      - run: ansible-playbook -i 'localhost,' --syntax-check tests/test.yml
+      - run: ansible-playbook -vvv -i 'localhost,' --syntax-check tests/test.yml
 
   lint:
     executor: python/default
@@ -45,7 +45,7 @@ jobs:
             - /home/circleci/.pyenv/versions/
             - /home/circleci/.local/lib/
       - run: ansible-lint --version
-      - run: ansible-lint .
+      - run: ansible-lint -vv .
 
 workflows:
   syntax-check-and-lint:
@@ -55,5 +55,5 @@ workflows:
           matrix:
             parameters:
               # Empty string means latest
-              ansible-version: ["", "~=2.9.0", "~=2.8.0"]
+              ansible-version: ["", "~=2.10.0", "~=2.9.0", "~=2.8.0"]
       - lint
