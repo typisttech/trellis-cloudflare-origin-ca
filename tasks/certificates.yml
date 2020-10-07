@@ -7,7 +7,6 @@
     -key-size {{ site_cfca_config.key_size }} \
     -key-type {{ site_cfca_config.key_type }}"
   args:
-    executable: "/bin/bash"
     chdir: "{{ nginx_ssl_path }}/cloudflare-origin-ca"
     creates: "{{ item.key }}.*"
   environment:
