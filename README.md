@@ -119,12 +119,6 @@ wordpress_sites:
         - example.com
         - '*.example.com'
         - '*.another-example.com'
-      # Key size in bits to use for the generated key pair (Acceptable sizes: rsa: 2048|3072|4096, ecdsa: 256|384|521)
-      # Default: 256
-      key_size: 3072
-      # Type of key pair to generate, either RSA or ECDSA. (rsa|ecdsa)
-      # Default: ecdsa
-      key_type: rsa
 ```
 
 ## Hacking Trellis' Playbook
@@ -167,6 +161,24 @@ Encrypt your Cloudflare Origin CA Key in `group_vars/<environment>/vault.yml`. S
 > --- Cloudflare Support
 
 Cloudflare Origin CA doesn't support OCSP stapling. Disable OCSP stapling for all sites using Cloudflare Origin CA. See [role variables](#role-variables).
+
+### `key_type` is deprecated. Please remove it from `example.com`
+
+To avoid misconfiguration, the `key_type` (ECDSA or RSA) and `key_size` (bits) options are deprecated. Since v0.8, this role generates 521-bit ECDSA keys only.
+
+If you had previsously generated CA certificates with other configurations:
+1. remove the CA certificates from servers
+1. revoke the CA certificates via Cloudflare dashboard
+1. re-provision the servers
+
+### `key_size` is deprecated. Please remove it from `example.com`
+
+To avoid misconfiguration, the `key_type` (ECDSA or RSA) and `key_size` (bits) options are deprecated. Since v0.8, this role generates 521-bit ECDSA keys only.
+
+If you had previsously generated CA certificates with other configurations:
+1. remove the CA certificates from servers
+1. revoke the CA certificates via Cloudflare dashboard
+1. re-provision the servers
 
 ### Nginx directories not included
 
@@ -215,16 +227,21 @@ To get certificates from [Let's Encrypt](https://letsencrypt.org/), you have to 
 
 See [Introducing Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates) on Cloudflare blog.
 
-### Why use 256-bit ECDSA key as default?
+### Why only 521-bit ECDSA keys allowed?
 
 >I assume you would like to setup [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617-Authenticated-Origin-Pulls) with Cloudflare. I would recommend ECDSA, as elliptic curves provide the same security with less computational overhead.
 >
 >Find out more about [ECDSA: The digital signature algorithm of a better internet](https://blog.cloudflare.com/ecdsa-the-digital-signature-algorithm-of-a-better-internet/)
 >The above article also mentioned that: According to the [ECRYPT II recommendations](http://www.keylength.com/en/3/) on key length, a 256-bit elliptic curve key provides as much protection as a 3,248-bit asymmetric key.Typical RSA keys in website certificates are 2048-bits. So, I think going with 256-bits ECDSA will be a good choice.
 >
-> --- Cloudflare Support
+> --- Cloudflare Support, September 2017
 
-If you insist to use RSA keys, make sure you set `key_size` to at least `2048`.
+To avoid misconfiguration, the `key_type` (ECDSA or RSA) and `key_size` (bits) options are deprecated. Since v0.8, this role generates 521-bit ECDSA keys only.
+
+If you had previsously generated CA certificates with other configurations:
+1. remove the CA certificates from servers
+1. revoke the CA certificates via Cloudflare dashboard
+1. re-provision the servers
 
 ### Why Cloudflare Origin CA key is logged even `cloudflare_origin_ca_no_log` is `true`?
 

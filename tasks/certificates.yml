@@ -4,8 +4,8 @@
     -certificate-out {{ item.key | quote }}.pem \
     -days {{ site_cfca_config.days }} \
     -hostnames {{ site_cfca_config.hostnames | join(',') }} \
-    -key-size {{ site_cfca_config.key_size }} \
-    -key-type {{ site_cfca_config.key_type }}"
+    -key-size 521 \
+    -key-type ecdsa"
   args:
     chdir: "{{ nginx_ssl_path }}/cloudflare-origin-ca"
     creates: "{{ item.key }}.*"
