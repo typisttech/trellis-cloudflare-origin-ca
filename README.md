@@ -18,7 +18,7 @@
 </div>
 
 <p align="center">
-  <strong>Add Cloudflare Origin CA to Trellis as SSL provider.</strong>
+  <strong>Add Cloudflare Origin CA to Trellis as a SSL provider.</strong>
   <br />
   <br />
   Built with ♥ by <a href="https://www.typist.tech/">Typist Tech</a>
