@@ -4,8 +4,6 @@ site_uses_cloudflare_origin_ca: "{{ ssl_enabled and item.value.ssl.provider | de
 site_cfca_config_default:
   days: 5475
   hostnames: "{{ site_hosts | union(multisite_subdomains_wildcards) }}"
-  key_size: 256
-  key_type: ecdsa
 
 site_cfca_config: "{{ site_cfca_config_default | combine(item.value.cloudflare_origin_ca | default({})) }}"
 

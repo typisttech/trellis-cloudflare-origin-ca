@@ -4,17 +4,37 @@
     msg: No site is using Cloudflare Origin CA
   when: sites_using_cloudflare_origin_ca | count < 1
 
-- name: Fail if vault_cloudflare_origin_ca_key is not defined
+- name: Fail if `vault_cloudflare_origin_ca_key` is not defined
   fail:
-    msg: vault_cloudflare_origin_ca_key is not defined
+    msg: "`vault_cloudflare_origin_ca_key` is not defined"
   when: vault_cloudflare_origin_ca_key is not defined
 
 - name: Fail if OCSP stapling is enabled
   fail:
-    msg: "{{ item.key }} is using Cloudflare Origin CA but OCSP stapling is enabled"
+    msg: "`{{ item.key }}` is using Cloudflare Origin CA but OCSP stapling is enabled"
   when:
     - site_uses_cloudflare_origin_ca | bool
     - item.value.ssl.stapling_enabled | default(true)
+  with_dict: "{{ wordpress_sites }}"
+
+- name: Fail if key_type  is defined
+  fail:
+    msg: |
+      `key_type` is deprecated. Please remove it from {{ item.key }}
+      See: https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/53"
+  when:
+    - site_uses_cloudflare_origin_ca | bool
+    - site_cfca_config.key_type is defined
+  with_dict: "{{ wordpress_sites }}"
+
+- name: Fail if key_size is defined
+  fail:
+    msg: |
+      `key_size` is deprecated. Please remove it from {{ item.key }}
+      See: https://github.com/TypistTech/trellis-cloudflare-origin-ca/pull/53
+  when:
+    - site_uses_cloudflare_origin_ca | bool
+    - site_cfca_config.key_size is defined
   with_dict: "{{ wordpress_sites }}"
 
 - include: setup.yml
