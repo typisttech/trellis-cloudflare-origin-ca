@@ -8,18 +8,23 @@ jobs:
     parameters:
       ansible-version:
         type: string
-    executor: python/default
+      python-version:
+        type: string
+    executor:
+      name: python/default
+      tag: <<parameters.python-version>>
     steps:
       - run: python --version
       - run: pip -V
       - checkout
       - restore_cache:
           keys:
-            - syntax-check-pip-<<parameters.ansible-version>>-{{ .Branch }}-
-            - syntax-check-pip-<<parameters.ansible-version>>-
+            - syntax-check-pip-v1-<<parameters.python-version>>-<<parameters.ansible-version>>-{{ .Branch }}-
+            - syntax-check-pip-v1-<<parameters.python-version>>-<<parameters.ansible-version>>-
+            - syntax-check-pip-v1-<<parameters.python-version>>-
       - run: pip install --upgrade ansible<< parameters.ansible-version >>
       - save_cache:
-          key: syntax-check-pip-<<parameters.ansible-version>>-{{ .Branch }}-{{ epoch }}-
+          key: syntax-check-pip-v1-<<parameters.python-version>>-<<parameters.ansible-version>>-{{ .Branch }}-{{ epoch }}-
           paths:
             - /home/circleci/.cache/pip
             - /home/circleci/.pyenv/versions/
@@ -35,11 +40,11 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - lint-pip-{{ .Branch }}-
-            - lint-pip-
+            - lint-pip-v1-{{ .Branch }}-
+            - lint-pip-v1-
       - run: pip install --upgrade ansible-lint
       - save_cache:
-          key: lint-pip-{{ .Branch }}-{{ epoch }}-
+          key: lint-pip-v1-{{ .Branch }}-{{ epoch }}-
           paths:
             - /home/circleci/.cache/pip
             - /home/circleci/.pyenv/versions/
@@ -51,9 +56,9 @@ workflows:
   syntax-check-and-lint:
     jobs:
       - syntax-check:
-          name: syntax-check-ansible-<<matrix.ansible-version>>
+          name: syntax-check-ansible-<<matrix.ansible-version>>-python-<<matrix.python-version>>
           matrix:
             parameters:
-              # Empty string means latest
-              ansible-version: ["", "~=2.10.0", "~=2.9.0", "~=2.8.0"]
+              ansible-version: ["\\<3.0.0", "~=2.10.0"]
+              python-version: ["3.9", "3.8", "3.7"]
       - lint

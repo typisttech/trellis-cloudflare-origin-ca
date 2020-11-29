@@ -1,65 +1,61 @@
+<div align="center">
+
 # Trellis Cloudflare Origin CA
 
-[![Ansible Role](https://img.shields.io/ansible/role/20120.svg)](https://galaxy.ansible.com/TypistTech/trellis-cloudflare-origin-ca/)
-[![GitHub tag](https://img.shields.io/github/tag/TypistTech/trellis-cloudflare-origin-ca.svg)](https://github.com/TypistTech/trellis-cloudflare-origin-ca/tags)
-[![license](https://img.shields.io/github/license/TypistTech/trellis-cloudflare-origin-ca.svg)](https://github.com/TypistTech/trellis-cloudflare-origin-ca/blob/master/LICENSE)
-[![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.typist.tech/donate/trellis-cloudflare-origin-ca/)
-[![Hire Typist Tech](https://img.shields.io/badge/Hire-Typist%20Tech-ff69b4.svg)](https://www.typist.tech/contact/)
+</div>
+
+<div align="center">
+
+[![Ansible Role](https://img.shields.io/ansible/role/20120?style=flat-square)](https://galaxy.ansible.com/TypistTech/trellis-cloudflare-origin-ca/)
+[![Ansible Role Downloads](https://img.shields.io/ansible/role/d/20120?style=flat-square)](https://galaxy.ansible.com/TypistTech/trellis-cloudflare-origin-ca/)
+[![CircleCI](https://img.shields.io/circleci/build/gh/TypistTech/trellis-cloudflare-origin-ca?style=flat-square)](https://circleci.com/gh/TypistTech/trellis-cloudflare-origin-ca)
+[![License](https://img.shields.io/github/license/TypistTech/trellis-cloudflare-origin-ca.svg?style=flat-square)](https://github.com/TypistTech/trellis-cloudflare-origin-ca/blob/master/LICENSE)
+[![Twitter Follow @TangRufus](https://img.shields.io/twitter/follow/TangRufus?style=flat-square&color=1da1f2&logo=twitter)](https://twitter.com/tangrufus)
+[![Hire Typist Tech](https://img.shields.io/badge/Hire-Typist%20Tech-ff69b4.svg?style=flat-square)](https://www.typist.tech/contact/)
+
+</div>
+
+<p align="center">
+  <strong>Add Cloudflare Origin CA to Trellis as SSL provider.</strong>
+  <br />
+  <br />
+  Built with ♥ by <a href="https://www.typist.tech/">Typist Tech</a>
+</p>
+
+---
+
+**Trellis Cloudflare Origin CA** is an open source project and completely free to use.
+
+However, the amount of effort needed to maintain and develop new features is not sustainable without proper financial backing. If you have the capability, please consider donating using the links below:
+
+<div align="center">
+
+[![GitHub via Sponsor](https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?style=flat-square&logo=github)](https://github.com/sponsors/TangRufus)
+[![Sponsor via PayPal](https://img.shields.io/badge/Sponsor-PayPal-blue.svg?style=flat-square&logo=paypal)](https://typist.tech/go/paypal-donate/)
+[![More Sponsorship Information](https://img.shields.io/badge/Sponsor-More%20Details-ff69b4?style=flat-square)](https://typist.tech/donate/trellis-cloudflare-origin-ca/)
+
+</div>
+
+---
 
 Add [Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/) to [Trellis](https://github.com/roots/trellis) as a [SSL provider](https://roots.io/trellis/docs/ssl/)
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Why?
 
+Short answer: To keep connection between Cloudflare and your severs private and secure from tampering.
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Role Variables](#role-variables)
-- [Hacking Trellis' Playbook](#hacking-trellis-playbook)
-- [Nginx Includes](#nginx-includes)
-- [Common Errors](#common-errors)
-  - [No site is using Cloudflare Origin CA](#no-site-is-using-cloudflare-origin-ca)
-  - [`vault_cloudflare_origin_ca_key` is not defined](#vault_cloudflare_origin_ca_key-is-not-defined)
-  - [`example.com` is using Cloudflare Origin CA but OCSP stapling is enabled](#examplecom-is-using-cloudflare-origin-ca-but-ocsp-stapling-is-enabled)
-  - [Nginx directories not included](#nginx-directories-not-included)
-  - [400 Bad Request - No required SSL certificate was sent](#400-bad-request---no-required-ssl-certificate-was-sent)
-- [FAQ](#faq)
-  - [Why use Cloudflare Origin CA?](#why-use-cloudflare-origin-ca)
-  - [What are the benefits of Cloudflare Origin CA over Let's Encrypt?](#what-are-the-benefits-of-cloudflare-origin-ca-over-lets-encrypt)
-  - [What are the benefits of Cloudflare Origin CA over other public certificates?](#what-are-the-benefits-of-cloudflare-origin-ca-over-other-public-certificates)
-  - [Why use 256-bit ECDSA key as default?](#why-use-256-bit-ecdsa-key-as-default)
-  - [Why Cloudflare Origin CA key is logged even `cloudflare_origin_ca_no_log` is `true`?](#why-cloudflare-origin-ca-key-is-logged-even-cloudflare_origin_ca_no_log-is-true)
-  - [Does Cloudflare Origin CA perfect?](#does-cloudflare-origin-ca-perfect)
-  - [It looks awesome. Where can I find some more goodies like this?](#it-looks-awesome-where-can-i-find-some-more-goodies-like-this)
-- [See Also](#see-also)
-- [Support!](#support)
-  - [Donate via PayPal *](#donate-via-paypal-)
-  - [Why don't you hire me?](#why-dont-you-hire-me)
-  - [Want to help in other way? Want to be a sponsor?](#want-to-help-in-other-way-want-to-be-a-sponsor)
-- [Feedback](#feedback)
-- [Author Information](#author-information)
-- [Contributing](#contributing)
-- [License](#license)
+Long answer:
+> Cloudflare’s Flexible SSL mode is the default for Cloudflare sites on the Free plan. Flexible SSL mode means that traffic from browsers to Cloudflare will be encrypted, but traffic from Cloudflare to a site's origin server will not be. To take advantage of our [Full and Strict SSL](https://www.cloudflare.com/ssl) mode—which encrypts the connection between Cloudflare and the origin server—it’s necessary to install a certificate on the origin server.
+>
+> Cloudflare Blog - [Origin Server Connection Security with Universal SSL](https://blog.cloudflare.com/origin-server-connection-security-with-universal-ssl/)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+### What are the benefits of Cloudflare Origin CA over Let's Encrypt?
 
-## Requirements
+To get certificates from [Let's Encrypt](https://letsencrypt.org/), you have to first disable Cloudflare because Cloudflare hides actual server IPs and make Let's Encrypt challenges fail. Using Cloudflare Origin CA simplifies the troubles.
 
-* [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) 2.8 or later
-* [Trellis@f2b8107](https://github.com/roots/trellis/commit/f2b81074c83475837e544a8aa5c3e909e760aa8a) or later
-* [Cloudflare](https://www.cloudflare.com/) account
-* Ubuntu 16.04 (Xenial)
+### What are the benefits of Cloudflare Origin CA over other public certificates?
 
-## Installation
-
-Add this role to `requirements.yml`:
-
-```yaml
-- src: TypistTech.trellis-cloudflare-origin-ca # Case-sensitive!
-  version: 0.7.0 # Check for latest version!
-```
-
-Run `$ ansible-galaxy install -r requirements.yml` to install this new role.
+See [Introducing Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates) on Cloudflare blog.
 
 ## Role Variables
 
@@ -120,6 +116,32 @@ wordpress_sites:
         - '*.example.com'
         - '*.another-example.com'
 ```
+
+---
+
+<p align="center">
+  <strong>Typist Tech is ready to build your next awesome WordPress site. <a href="https://typist.tech/contact/">Hire us!</a></strong>
+</p>
+
+---
+
+## Requirements
+
+* [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) 2.10 or later
+* [Trellis@c86d8a0](https://github.com/roots/trellis/commit/c86d8a042da811e89aa7fdda08159dc86f65be77) or later
+* [Cloudflare](https://www.cloudflare.com/) account
+* Ubuntu 18.04 (Bionic) or 20.04 (Focal)
+
+## Installation
+
+Add this role to `galaxy.yml`:
+
+```yaml
+- src: TypistTech.trellis-cloudflare-origin-ca # Case-sensitive!
+  version: 0.8.0 # Check for latest version!
+```
+
+Run `$ trellis galaxy install`
 
 ## Hacking Trellis' Playbook
 
@@ -210,23 +232,6 @@ Solution:
 
 ## FAQ
 
-### Why use Cloudflare Origin CA?
-
-Short answer: To keep connection between Cloudflare and your severs private and secure from tampering.
-
-Long answer:
-> Cloudflare’s Flexible SSL mode is the default for Cloudflare sites on the Free plan. Flexible SSL mode means that traffic from browsers to Cloudflare will be encrypted, but traffic from Cloudflare to a site's origin server will not be. To take advantage of our [Full and Strict SSL](https://www.cloudflare.com/ssl) mode—which encrypts the connection between Cloudflare and the origin server—it’s necessary to install a certificate on the origin server.
->
-> Cloudflare Blog - [Origin Server Connection Security with Universal SS ](https://blog.cloudflare.com/origin-server-connection-security-with-universal-ssl/)
-
-### What are the benefits of Cloudflare Origin CA over Let's Encrypt?
-
-To get certificates from [Let's Encrypt](https://letsencrypt.org/), you have to first disable Cloudflare because Cloudflare hides actual server IPs and make Let's Encrypt challenges fail. Using Cloudflare Origin CA simplify the troubles.
-
-### What are the benefits of Cloudflare Origin CA over other public certificates?
-
-See [Introducing Cloudflare Origin CA](https://blog.cloudflare.com/cloudflare-ca-encryption-origin/#whataretheincrementalbenefitsoforigincaoverpubliccertificates) on Cloudflare blog.
-
 ### Why only 521-bit ECDSA keys allowed?
 
 >I assume you would like to setup [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617-Authenticated-Origin-Pulls) with Cloudflare. I would recommend ECDSA, as elliptic curves provide the same security with less computational overhead.
@@ -255,18 +260,27 @@ If you had previsously generated CA certificates with other configurations:
 * [Cloudflare, We Have A Problem](http://cryto.net/~joepie91/blog/2016/07/14/cloudflare-we-have-a-problem/)
 * [On Cloudflare](https://www.tyil.nl/post/2017/12/17/on-cloudflare/)
 
-### It looks awesome. Where can I find some more goodies like this?
+### It looks awesome. Where can I find some more goodies like this
 
-* Articles on Typist Tech's [blog](https://typist.tech)
-* [Tang Rufus' WordPress plugins](https://profiles.wordpress.org/tangrufus#content-plugins) on wp.org
-* More projects on [Typist Tech's GitHub profile](https://github.com/TypistTech)
-* Stay tuned on [Typist Tech's newsletter](https://typist.tech/go/newsletter)
-* Follow [Tang Rufus' Twitter account](https://twitter.com/TangRufus)
-* Hire [Tang Rufus](https://typist.tech/contact) to build your next awesome site
+- Articles on [Typist Tech's blog](https://typist.tech)
+- [Tang Rufus' WordPress plugins](https://profiles.wordpress.org/tangrufus#content-plugins) on wp.org
+- More projects on [Typist Tech's GitHub profile](https://github.com/TypistTech)
+- Stay tuned on [Typist Tech's newsletter](https://typist.tech/go/newsletter)
+- Follow [Tang Rufus' Twitter account](https://twitter.com/TangRufus)
+- **Hire [Tang Rufus](https://typist.tech/contact) to build your next awesome site**
+
+### Where can I give 5-star reviews?
+
+Thanks! Glad you like it. It's important to let me knows somebody is using this project. Please consider:
+
+- [tweet](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FTypistTech%2Ftrellis-cloudflare-origin-ca&via=tangrufus&text=Add%20@Cloudflare%20Origin%20CA%20to%20%23Trellis%20as%20SSL%20provider%20&hashtags=wordpress) something good with mentioning [@TangRufus](https://twitter.com/tangrufus)
+- ★ star [the Github repo](https://github.com/TypistTech/trellis-cloudflare-origin-ca)
+- [👀 watch](https://github.com/TypistTech/trellis-cloudflare-origin-ca/subscription) the Github repo
+- write tutorials and blog posts
+- **[hire](https://www.typist.tech/contact/) Typist Tech**
 
 ## See Also
 
-* [Sunny](https://wordpress.org/plugins/sunny/) - Automatically purge Cloudflare cache, including cache everything rules
 * [WP Cloudflare Guard](https://wordpress.org/plugins/wp-cloudflare-guard/) - Connecting WordPress with Cloudflare firewall, protect your WordPress site at DNS level. Automatically create firewall rules to block dangerous IPs
 * The [Root](https://github.com/roots/trellis/issues/868) of Trellis Cloudflare Origin CA
 * The [Origin](https://github.com/roots/trellis/pull/870) of Trellis Cloudflare Origin CA
@@ -275,37 +289,33 @@ If you had previsously generated CA certificates with other configurations:
 * [Trellis Nginx Includes](https://roots.io/trellis/docs/nginx-includes/)
 * [Ansible Vault](https://roots.io/trellis/docs/vault/)
 
-## Support!
+## Running the Tests
 
-### Donate via PayPal [![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.typist.tech/donate/trellis-cloudflare-origin-ca/)
+Run the tests:
 
-Love Trellis Cloudflare Origin CA? Help me maintain it, a [donation here](https://www.typist.tech/donate/trellis-cloudflare-origin-ca/) can help with it.
-
-### Why don't you hire me?
-
-Ready to take freelance WordPress jobs. Contact me via the contact form [here](https://www.typist.tech/contact/) or, via email [info@typist.tech](mailto:info@typist.tech)
-
-### Want to help in other way? Want to be a sponsor?
-
-Contact: [Tang Rufus](mailto:tangrufus@gmail.com)
+```bash
+ansible-playbook -vvv -i 'localhost,' --syntax-check tests/test.yml
+ansible-lint -vv .
+```
 
 ## Feedback
 
-**Please provide feedback!** We want to make this library useful in as many projects as possible.
-Please submit an [issue](https://github.com/TypistTech/trellis-cloudflare-origin-ca/issues/new) and point out what you do and don't like, or fork the project and make suggestions.
+**Please provide feedback!** We want to make this project as useful as possible.
+Please [submit an issue](https://github.com/TypistTech/trellis-cloudflare-origin-ca/issues/new) and point out what you do and don't like, or fork the project and [send pull requests](https://github.com/TypistTech/trellis-cloudflare-origin-ca/pulls/).
 **No issue is too small.**
 
-## Author Information
+## Security Vulnerabilities
 
-[Trellis Cloudflare Origin CA](https://github.com/TypistTech/trellis-cloudflare-origin-ca) is a [Typist Tech](https://www.typist.tech) project and maintained by [Tang Rufus](https://twitter.com/Tangrufus), freelance developer for [hire](https://www.typist.tech/contact/).
+If you discover a security vulnerability within this project, please email us at [trellis-cloudflare-origin-ca@typist.tech](mailto:trellis-cloudflare-origin-ca@typist.tech).
+All security vulnerabilities will be promptly addressed.
+
+## Credits
+
+[Trellis Cloudflare Origin CA](https://github.com/TypistTech/trellis-cloudflare-origin-ca) is a [Typist Tech](https://typist.tech) project and maintained by [Tang Rufus](https://twitter.com/TangRufus), freelance developer for [hire](https://www.typist.tech/contact/).
 
 Special thanks to [the Roots team](https://roots.io/about/) whose [Trellis](https://github.com/roots/trellis) make this project possible.
 
 Full list of contributors can be found [here](https://github.com/TypistTech/trellis-cloudflare-origin-ca/graphs/contributors).
-
-## Contributing
-
-Please see [CODE_OF_CONDUCT](./CODE_OF_CONDUCT.md) for details.
 
 ## License
 
