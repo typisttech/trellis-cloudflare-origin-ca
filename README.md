@@ -7,7 +7,9 @@
 <div align="center">
 
 [![Ansible Role](https://img.shields.io/ansible/role/20120?style=flat-square)](https://galaxy.ansible.com/TypistTech/trellis-cloudflare-origin-ca/)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/TypistTech/trellis-cloudflare-origin-ca?style=flat-square)](https://galaxy.ansible.com/TypistTech/trellis-cloudflare-origin-ca/)
 [![Ansible Role Downloads](https://img.shields.io/ansible/role/d/20120?style=flat-square)](https://galaxy.ansible.com/TypistTech/trellis-cloudflare-origin-ca/)
+[![Ansible Quality Score](https://img.shields.io/ansible/quality/20120?style=flat-square)](https://galaxy.ansible.com/TypistTech/trellis-cloudflare-origin-ca/)
 [![CircleCI](https://img.shields.io/circleci/build/gh/TypistTech/trellis-cloudflare-origin-ca?style=flat-square)](https://circleci.com/gh/TypistTech/trellis-cloudflare-origin-ca)
 [![License](https://img.shields.io/github/license/TypistTech/trellis-cloudflare-origin-ca.svg?style=flat-square)](https://github.com/TypistTech/trellis-cloudflare-origin-ca/blob/master/LICENSE)
 [![Twitter Follow @TangRufus](https://img.shields.io/twitter/follow/TangRufus?style=flat-square&color=1da1f2&logo=twitter)](https://twitter.com/tangrufus)
