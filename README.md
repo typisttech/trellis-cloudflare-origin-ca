@@ -255,7 +255,7 @@ If you had previsously generated CA certificates with other configurations:
 
 > Note that the use of the `no_log` attribute does not prevent data from being shown when debugging Ansible itself via the `ANSIBLE_DEBUG` environment variable.
 >
-> --- [Ansible Docs](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-keep-secret-data-in-my-playbook)
+> --- [Ansible Docs](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-keep-secret-data-in-my-playbook)
 
 ### Does Cloudflare Origin CA perfect?
 
