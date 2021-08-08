@@ -149,12 +149,13 @@ Run `$ trellis galaxy install`
 
 Add this role to `server.yml` **immediately after** `role: wordpress-setup`:
 
-```yaml
-roles:
-    # Some other Trellis roles ...
-    - { role: wordpress-setup, tags: [wordpress, wordpress-setup, letsencrypt, cloudflare-origin-ca] }
-    - { role: TypistTech.trellis-cloudflare-origin-ca, tags: [cloudflare-origin-ca, wordpress-setup], when: sites_using_cloudflare_origin_ca | count }
-    # Some other Trellis roles ...
+```diff
+    roles:
+      # ...
+-     - { role: wordpress-setup, tags: [wordpress, wordpress-setup, letsencrypt] }
++     - { role: wordpress-setup, tags: [wordpress, wordpress-setup, letsencrypt, cloudflare-origin-ca] }
++     - { role: TypistTech.trellis-cloudflare-origin-ca, tags: [cloudflare-origin-ca, wordpress-setup], when: sites_using_cloudflare_origin_ca | count }
+      # ...
 ```
 
 Note: `role: wordpress-setup` is tagged with `cloudflare-origin-ca`.
