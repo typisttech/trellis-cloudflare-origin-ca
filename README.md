@@ -117,6 +117,10 @@ wordpress_sites:
         - example.com
         - '*.example.com'
         - '*.another-example.com'
+      # Enable Authenticated Origin Pulls support. Requires SSL/TLS encryption mode set to Full or higher and Authenticated Origin Pulls must be turned on.
+      # Default: false
+      # https://developers.cloudflare.com/ssl/origin-configuration/authenticated-origin-pull/
+      authenticated_origin_pulls_enabled: true
 ```
 
 ---

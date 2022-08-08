@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+
+# Cloudflare Authenticated Origin Pulls
+
+ssl_client_certificate {{ nginx_ssl_path }}/authenticated_origin_pull_ca.pem;
+ssl_verify_client on;

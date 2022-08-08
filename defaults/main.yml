@@ -1,5 +1,6 @@
 sites_using_cloudflare_origin_ca: "[{% for name, site in wordpress_sites.items() | list if site.ssl.enabled and site.ssl.provider | default('manual') == 'cloudflare-origin-ca' %}'{{ name }}',{% endfor %}]"
 site_uses_cloudflare_origin_ca: "{{ ssl_enabled and item.value.ssl.provider | default('manual') == 'cloudflare-origin-ca' }}"
+site_uses_cloudflare_authenticated_origin_pulls: "{{site_uses_cloudflare_origin_ca and item.value.cloudflare_origin_ca.authenticated_origin_pulls_enabled | default(false) }}"
 
 site_cfca_config_default:
   days: 5475

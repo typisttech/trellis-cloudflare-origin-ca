@@ -15,3 +15,12 @@
   when: site_uses_cloudflare_origin_ca | bool
   with_dict: "{{ wordpress_sites }}"
   notify: reload nginx
+
+- name: Template Nginx SSL client directives out to includes.d
+  template:
+    src: cloudflare-authenticated-origin-pulls.conf.j2
+    dest: "{{ nginx_path }}/includes.d/{{ item.key }}/cloudflare-authenticated-origin-pulls.conf"
+    mode: '0600'
+  when: site_uses_cloudflare_authenticated_origin_pulls | bool
+  with_dict: "{{ wordpress_sites }}"
+  notify: reload nginx

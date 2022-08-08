@@ -14,3 +14,11 @@
   no_log: "{{ cloudflare_origin_ca_no_log }}"
   when: site_uses_cloudflare_origin_ca | bool
   with_dict: "{{ wordpress_sites }}"
+
+- name: Fetch Cloudflare Authenticated Origin Pull CA
+  command: "curl -o {{ nginx_ssl_path }}/authenticated_origin_pull_ca.pem https://developers.cloudflare.com/ssl/static/authenticated_origin_pull_ca.pem"
+  args:
+    chdir: "{{ nginx_ssl_path }}"
+    creates: "authenticated_origin_pull_ca.pem"
+  when: site_uses_cloudflare_authenticated_origin_pulls | bool
+  with_dict: "{{ wordpress_sites }}"
